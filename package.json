@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "request": "^2.88.2"
+  },
+  "name": "weatherapp",
+  "description": "Weather App, fix description once done",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jad-debugs/WeatherApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jad-debugs/WeatherApp/issues"
+  },
+  "homepage": "https://github.com/jad-debugs/WeatherApp#readme"
+}
