@@ -6,17 +6,17 @@ if (!location) {
     console.log('No location was provided! Try again')
 }
 else {
-    geocode(location, (error, geoData) => {
+    geocode(location, (error, {latitude, longitude, location} = {}) => {
         if (error) {
             // return stops this function
             return console.log(error)
         }
 
-        forecast(geoData.latitude, geoData.longitude, (error, forecastData) => {
+        forecast(latitude, longitude, (error, forecastData) => {
             if (error) {
                 return console.log(error)
             }
-            console.log(geoData.location)
+            console.log(location)
             console.log(forecastData)
         })
     })
