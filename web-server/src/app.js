@@ -1,6 +1,8 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 
 const app = express()
 
@@ -40,11 +42,33 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-    obj = {
-        forecast: 'Rainy and cloudy',
-        location: 'California',
+    if (!req.query.address) {
+        return res.send({
+            error: 'You must provide an address!'
+        })
     }
-    res.send(obj)
+    geocode(req.query.address, (error, {latitude, longitude, location} = {}) => {
+        if (error) {
+            // return stops this function
+            return res.send({error})
+        }
+
+        forecast(latitude, longitude, (error, forecastData) => {
+            if (error) {
+                return res.send({error})
+            }
+            res.send({
+                forecast: forecastData,
+                location,
+                address: req.query.address
+            })
+        })
+    })
+})
+
+app.get('/easter-egg', (req, res) => {
+    res.send('<h1>HEY! Did you read the source code?</h1>'
+    + '<h1>Well, nice I guess</h1>')
 })
 
 app.get('/help/*', (req, res) => {
