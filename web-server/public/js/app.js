@@ -3,6 +3,10 @@ console.log('Client side js is loaded')
 
 const weatherForm = document.querySelector('form')
 const searchElement = document.querySelector('input')
+const errorMessage = document.querySelector('#error')
+const successMessage = document.querySelector('#success')
+
+
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -10,13 +14,17 @@ weatherForm.addEventListener('submit', (e) => {
     const location = searchElement.value
     const url = 'http://localhost:3000/weather?address=' + location
 
+    errorMessage.textContent = 'Loading...'
+    successMessage.textContent = ''
+
     fetch(url).then((response) => {
         response.json().then((data) => {
             if (data.error) {
-                console.log(data.error)
+                errorMessage.textContent = data.error
             }
             else {
-                console.log(data.location + ' ' + data.forecast)
+                errorMessage.textContent = data.location
+                successMessage.textContent = data.forecast
             }
         })
     })
