@@ -11,8 +11,16 @@ const forecast = (latitude, longitude, callback) => {
             callback('Unable to find', undefined)
         }
         else {
-            callback(undefined, 'It is currently ' + body.current.temperature
-                     + ' degrees outside, but it feels like ' + body.current.feelslike + ' degrees')
+            var forecast = body.current.weather_descriptions[0] + '. It is currently ' + body.current.temperature + 
+                ' degrees outside, but it feels like ' + body.current.feelslike + ' degrees. '
+            const precip = body.current.precip
+            if (precip <= 1) {
+                forecast += 'There is 1 millimeter of rain.'
+            }
+            else {
+                forecast += 'There are ' + precip + ' millimeters of rain.'
+            }
+            callback(undefined, forecast)
         }
     })
 }

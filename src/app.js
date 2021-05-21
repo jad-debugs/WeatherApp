@@ -24,7 +24,7 @@ app.use(express.static(publicDirectoryPath))
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather',
-        name: 'Jad Isaac'
+        name: 'Jad Isaac',
     })
 })
 
@@ -62,7 +62,7 @@ app.get('/weather', (req, res) => {
             res.send({
                 forecast: forecastData,
                 location,
-                address: req.query.address
+                address: req.query.address,
             })
         })
     })
